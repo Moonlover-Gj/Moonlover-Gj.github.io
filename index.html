@@ -159,7 +159,13 @@
               
             </span>
 
-
+            <!-- 一言 -->
+            
+            <br>
+            <span class="h2" id="hitokoto">
+                
+            </span>
+            
 
             
           </div>
@@ -350,13 +356,30 @@ Quick
 
   <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
+    function typing(id, title){
+        var typed = new Typed('#' + id, {
+            strings: [
+              '  ',
+              title + "&nbsp;",
+            ],
+            cursorChar: "_",
+            typeSpeed: 70,
+            loop: false,
+        });
+        typed.stop();
+        $(document).ready(function () {
+            $(".typed-cursor").addClass("h2");
+            typed.start();
+        });
+    }
+    
+        fetch('https://v1.hitokoto.cn')
+        .then(response => response.json())
+        .then(data => {
+           typing("hitokoto", data.hitokoto  + '<br /> <br /> <h4>'+ '——' + '《' + data.from + '》' + '</h4>')
+        })
+        .catch(console.error)
+    
   </script>
 
 
@@ -392,8 +415,7 @@ Quick
 <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/yinghua.js"></script>
 <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
 <script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/timeDate.js"></script>
-<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/boom.js"></script>
-<script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/dianjichuzi.js"></script>
 
 
 
@@ -402,5 +424,5 @@ Quick
 
 
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
