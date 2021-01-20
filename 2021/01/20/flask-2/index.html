@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="PGJ">
   <meta name="keywords" content="">
-  <title>Linux用户及文件权限管理 - 2020 to 2030</title>
+  <title>Flask 路由 - 2020 to 2030</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Linux用户及文件权限管理">
+            <span class="h2" id="subtitle" title="Flask 路由">
               
             </span>
 
@@ -183,8 +183,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-01-18 17:26" pubdate>
-        2021年1月18日 下午
+      <time datetime="2021-01-20 15:31" pubdate>
+        2021年1月20日 下午
       </time>
     </span>
   
@@ -195,7 +195,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.5k 字
     </span>
   
 
@@ -205,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15
+      17
        分钟
     </span>
   
@@ -243,81 +243,80 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Linux用户及文件权限管理</h1>
+            <h1 style="display: none">Flask 路由</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年1月18日 下午
+                  本文最后更新于：2021年1月20日 下午
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="用户及文件权限管理"><a href="#用户及文件权限管理" class="headerlink" title="用户及文件权限管理"></a>用户及文件权限管理</h1><p>Linux 的<strong>用户管理</strong>和<strong>权限机制</strong>，不同用户不可以轻易地查看、修改彼此的文件</p>
-<h1 id="一、Linux-用户管理"><a href="#一、Linux-用户管理" class="headerlink" title="一、Linux 用户管理"></a>一、Linux 用户管理</h1><h2 id="查看用户"><a href="#查看用户" class="headerlink" title="查看用户"></a>查看用户</h2><p>打开终端，输入命令</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vala">who am i<br><span class="hljs-meta"># 或者</span><br>who mom likes <br><br><span class="hljs-meta"># 注意：要查看当前登录用户的用户名，去掉空格直接使用 whoami 即可</span><br>whoami<br></code></pre></td></tr></table></figure>
-<p><code>who</code>命令的其他常用参数</p>
+              <h1 id="Flask-路由"><a href="#Flask-路由" class="headerlink" title="Flask 路由"></a>Flask 路由</h1><h2 id="路由介绍"><a href="#路由介绍" class="headerlink" title="路由介绍"></a>路由介绍</h2><p><code>route</code> 装饰器是用于把一个函数绑定到一个 URL 上</p>
+<p>例如上次的 <code>hello.py</code>文件可以修改：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask<br><br>app = Flask(__name__)<br><br><span class="hljs-comment"># 如果访问根目录 &#x27;/&#x27; ，返回 Index Page</span><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index</span>():</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Index Page&#x27;</span><br><br><span class="hljs-comment"># 如果访问 &#x27;/hello&#x27; ，返回 Hello, World!</span><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/hello&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello</span>():</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Hello, World!&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>这样就实现了通过访问不同的 URL 地址从而响应不同的页面。不仅如此！你可以动态地构造 URL 的特定部分，也可以在一个函数上绑定多个不同的规则。</p>
+<h2 id="变量规则"><a href="#变量规则" class="headerlink" title="变量规则"></a>变量规则</h2><p>为了给 URL 增加变量的部分，你需要把一些特定的字段标记成 <code>&lt;variable_name&gt;</code>。这些特定的字段将作为参数传入到你的函数中。当然也可以指定一个可选的转换器通过规则 <code>&lt;converter:variable_name&gt;</code>将变量值转换为特定的数据类型。</p>
+<p>在<code>hello.py</code>中添加代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/user/&lt;username&gt;&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show_user_profile</span>(<span class="hljs-params">username</span>):</span><br>    <span class="hljs-comment"># 显示用户名</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;User &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(username)<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/post/&lt;int:post_id&gt;&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show_post</span>(<span class="hljs-params">post_id</span>):</span><br>    <span class="hljs-comment"># 显示提交整型的用户&quot;id&quot;的结果，注意&quot;int&quot;是将输入的字符串形式转换为整型数据</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Post &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(post_id)<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/path/&lt;path:subpath&gt;&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show_subpath</span>(<span class="hljs-params">subpath</span>):</span><br>    <span class="hljs-comment"># 显示 /path/ 之后的路径名</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Subpath &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(subpath)<br></code></pre></td></tr></table></figure>
+<p>转换器的主要类型如下：</p>
 <table>
 <thead>
 <tr>
-<th>参数</th>
-<th>说明</th>
+<th>类型</th>
+<th>含义</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>-a</code></td>
-<td>打印能打印的全部</td>
+<td>string</td>
+<td>默认的数据类型，接受没有任何斜杠 “/” 的字符串</td>
 </tr>
 <tr>
-<td><code>-d</code></td>
-<td>打印死掉的进程</td>
+<td>int</td>
+<td>接受整型</td>
 </tr>
 <tr>
-<td><code>-m</code></td>
-<td>同 <code>am i</code>，<code>mom likes</code></td>
+<td>float</td>
+<td>接受浮点类型</td>
 </tr>
 <tr>
-<td><code>-q</code></td>
-<td>打印当前登录用户数及用户名</td>
+<td>path</td>
+<td>和 string 类似，但是接受斜杠 “/”</td>
 </tr>
 <tr>
-<td><code>-u</code></td>
-<td>打印当前登录用户登录信息</td>
-</tr>
-<tr>
-<td><code>-r</code></td>
-<td>打印运行等级</td>
+<td>uuid</td>
+<td>只接受 uuid 字符串</td>
 </tr>
 </tbody></table>
-<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><p>在 Linux 系统里， <code>root</code> 账户拥有整个系统至高无上的权限，比如新建和添加用户。</p>
-<p>一般我们登录系统时都是以普通账户的身份登录的，要创建用户需要 root 权限，这里就要用到 <code>sudo</code> 这个命令了。不过使用这个命令有两个大前提，一是你要知道当前登录用户的密码，二是当前用户必须在 <code>sudo</code> 用户组。</p>
-<h3 id="su，su-与-sudo"><a href="#su，su-与-sudo" class="headerlink" title="su，su- 与 sudo"></a>su，su- 与 sudo</h3><p><strong>需要注意Linux环境下输入密码时不会显示的</strong></p>
-<p><code>su </code> 可以切换到用户 user，执行时需要输入目标用户的密码，<code>sudo </code> 可以以特权级别运行 cmd 命令，需要当前用户属于 sudo 组，且需要输入当前用户的密码。<code>su - </code> 命令也是切换用户，但是同时用户的环境变量和工作目录也会跟着改变成目标用户所对应的。</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-comment"># 我们创建一个叫`boy`的用户</span><br>sudo <span class="hljs-keyword">adduser </span><span class="hljs-keyword">boy</span><br><span class="hljs-keyword"># </span>修改用户密码的命令<br>sudo passwd <span class="hljs-keyword">boy</span><br><span class="hljs-keyword"># </span>切换登录用户<br>su -l <span class="hljs-keyword">boy</span><br></code></pre></td></tr></table></figure>
-<h2 id="用户组"><a href="#用户组" class="headerlink" title="用户组"></a>用户组</h2><p>在 Linux 里面每个用户都有一个归属（用户组），用户组简单地理解就是一组用户的集合，它们共享一些资源和权限，同时拥有私有资源。</p>
-<h3 id="查看属于的用户组"><a href="#查看属于的用户组" class="headerlink" title="查看属于的用户组"></a>查看属于的用户组</h3><h4 id="方法一：使用-groups-命令"><a href="#方法一：使用-groups-命令" class="headerlink" title="方法一：使用 groups 命令"></a>方法一：使用 groups 命令</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment"># 查看boy所属的用户组</span><br><span class="hljs-attribute">groups</span> boy<br></code></pre></td></tr></table></figure>
+<h3 id="唯一-URLs-重定向行为"><a href="#唯一-URLs-重定向行为" class="headerlink" title="唯一 URLs / 重定向行为"></a>唯一 URLs / 重定向行为</h3><p>添加如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/projects/&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">projects</span>():</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;The project page&#x27;</span><br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/about&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">about</span>():</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;The about page&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>第一种情况中：尾端有一个斜杠，当用户输入网址时忘了添加尾部的斜杠，系统回自动重定向到带了尾部斜杠的地址</p>
+<p>第二种情况中：尾端不带斜杠，当用户输入网址时多添加了尾部的斜杠，系统回报错<code>Not Found</code></p>
+<p>所以，在代码的 URL 设置时斜线只可多写不可少写，另外，URL设置不在尾端加斜杠 <code>/</code> 会使URL保持唯一，有助于避免搜索引擎索引同一个页面两次。</p>
+<h3 id="构建URL"><a href="#构建URL" class="headerlink" title="构建URL"></a>构建URL</h3><p>去构建一个 URL 来匹配一个特定的函数可以使用 <code>url_for()</code> 方法。它接受函数名作为第一个参数，以及一些关键字参数，每一个关键字参数对应于 URL 规则的变量部分。未知变量部分被插入到 URL 中作为查询参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask, url_for<br></code></pre></td></tr></table></figure>
+<h2 id="HTTP-方法"><a href="#HTTP-方法" class="headerlink" title="HTTP 方法"></a>HTTP 方法</h2><p>HTTP (也就是 Web 应用协议) 有不同的方法来访问 URLs 。默认情况下，路由只会响应 GET 请求，但是能够通过给 <code>route()</code> 装饰器提供 <code>methods</code> 参数来改变。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/login&#x27;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">login</span>():</span><br>    <span class="hljs-keyword">if</span> request.method == <span class="hljs-string">&#x27;POST&#x27;</span>:<br>        do_the_login()   <span class="hljs-comment"># 如果是 POST 方法就执行登录操作</span><br>    <span class="hljs-keyword">else</span>:<br>        show_the_login_form()   <span class="hljs-comment"># 如果是 GET 方法就展示登录表单</span><br></code></pre></td></tr></table></figure>
 
 
-<h4 id="方法二：查看-etc-group-文件"><a href="#方法二：查看-etc-group-文件" class="headerlink" title="方法二：查看 /etc/group 文件"></a>方法二：查看 /etc/group 文件</h4><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">cat /etc/<span class="hljs-keyword">group</span> <span class="hljs-title">| sort</span><br></code></pre></td></tr></table></figure>
-<p>这里的<code>cat</code>命令用于读取指定文件的内容并打印到终端输出， <code>| sort</code> 表示将读取的文本进行一个字典排序再输出</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-comment"># 使用 grep 命令过滤不想看到的内容（类似于关键词查找）</span><br>cat /etc/<span class="hljs-keyword">group</span> <span class="hljs-title">| grep</span> -E <span class="hljs-string">&quot;boy&quot;</span><br></code></pre></td></tr></table></figure>
-<h3 id="将其他用户加入-sudo-用户组"><a href="#将其他用户加入-sudo-用户组" class="headerlink" title="将其他用户加入 sudo 用户组"></a>将其他用户加入 sudo 用户组</h3><p>默认情况下新创建的用户是不具有 root 权限的，也不在 sudo 用户组，可以让其加入 sudo 用户组从而获取 root 权限：</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">su</span> -<span class="hljs-keyword">l</span> boy<br>sudo <span class="hljs-keyword">ls</span><br></code></pre></td></tr></table></figure>
-<p>可能会提示 boy 不在 sudoers 文件中，意思就是 boy 不在 sudo 用户组中</p>
-<p>使用 <code>usermod</code> 命令可以为用户添加用户组，同样使用该命令你必需有 root 权限，你可以直接使用 root 用户为其它用户添加用户组，或者用其它已经在 sudo 用户组的用户使用 sudo 命令获取权限来执行该命令。</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 切换回主用户pgj</span><br>su - pgj<br><br><span class="hljs-meta"># 开始设置 boy 用户为sudo用户组中</span><br>groups boy<br>sudo usermod -G sudo boy<br>groups boy<br><br><span class="hljs-meta"># 使用 sudo 获取 root 权限</span><br>su - boy<br>sudo ls /<br></code></pre></td></tr></table></figure>
-<h3 id="删除用户和用户组"><a href="#删除用户和用户组" class="headerlink" title="删除用户和用户组"></a>删除用户和用户组</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 删除用户so easy</span><br>sudo deluser boy --remove-home<br><span class="hljs-meta"># 使用 --remove-home 参数在删除用户时候会一并将该用户的工作目录一并删除。如果不使用那么系统会自动在 /home 目录为该用户保留工作目录。</span><br><br><br><span class="hljs-meta"># 删除用户组可以使用 groupdel 命令，倘若该群组中仍包括某些用户，则必须先删除这些用户后，才能删除群组。</span><br></code></pre></td></tr></table></figure>
-<h1 id="二、Linux-文件权限"><a href="#二、Linux-文件权限" class="headerlink" title="二、Linux 文件权限"></a>二、Linux 文件权限</h1><p>文件权限就是文件的访问控制权限，即哪些用户和组群可以访问文件以及可以执行什么样的操作。</p>
-<h2 id="查看文件权限"><a href="#查看文件权限" class="headerlink" title="查看文件权限"></a>查看文件权限</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 使用 ls 命令查看文件权限，使用较长格式列出文件</span><br><span class="hljs-keyword">ls</span> -l<br></code></pre></td></tr></table></figure>
-<p><code>ls</code>命令的其他常用的用法：</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 显示除了 .（当前目录）和 ..（上一级目录）之外的所有文件，包括隐藏文件（Linux 下以 . 开头的文件为隐藏文件）。</span><br>ls -a<br><br><span class="hljs-meta"># 查看一个目录的完整属性，而不是显示目录里面的文件属性</span><br>ls -dl &lt;目录名&gt;<br><br><span class="hljs-meta"># 显示所有文件大小，并以普通人类能看懂的方式呈现</span><br>ls -asSh<br><span class="hljs-meta"># 其中小s为显示文件大小，大S为按文件大小排序，具体可以使用 `man ls`命令查询 </span><br></code></pre></td></tr></table></figure>
-<h2 id="变更文件所有者"><a href="#变更文件所有者" class="headerlink" title="变更文件所有者"></a>变更文件所有者</h2><p>切换到 boy 用户，在/home/boy目录新建一个文件，命名为lover</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">su</span> - boy<br><span class="hljs-keyword">pwd</span><br>touch lover<br><span class="hljs-keyword">ls</span> -alh lover<br></code></pre></td></tr></table></figure>
-<p>切换回到 pgj(主用户) 用户，使用以下命令变更文件所有者为 pgj。</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 切换回 pgj 用户再执行一下操作</span><br><span class="hljs-keyword">cd</span> <span class="hljs-string">/home/boy</span><br><span class="hljs-keyword">ls</span> lover<br><span class="hljs-comment"># 最关键的一步：</span><br>sudo chown pgj lover<br></code></pre></td></tr></table></figure>
-<h2 id="修改文件权限"><a href="#修改文件权限" class="headerlink" title="修改文件权限"></a>修改文件权限</h2><p>文件的权限有两种表示方式：</p>
-<h3 id="数字表示"><a href="#数字表示" class="headerlink" title="数字表示"></a>数字表示</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 修改lover文件的权限</span><br>chmod <span class="hljs-number">600</span> lover<br><span class="hljs-meta"># 其中600是某种权限对应的数字</span><br>ls -alh lover<br></code></pre></td></tr></table></figure>
-<h3 id="加减赋值操作"><a href="#加减赋值操作" class="headerlink" title="加减赋值操作"></a>加减赋值操作</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-comment"># 也可以使用一下命令修改权限</span><br><span class="hljs-keyword">chmod</span> go-rw lover<br></code></pre></td></tr></table></figure>
-<p><code>g</code>、<code>o</code> 还有 <code>u</code> 分别表示 group（用户组）、others（其他用户） 和 user（用户），<code>+</code> 和 <code>-</code> 分别表示增加和去掉相应的权限。</p>
+<p>也许你并不清楚 HTTP 方法是什么？别担心，这里有一个 HTTP 方法的快速入门以及为什么它们重要：</p>
+<p><code>HTTP</code> 方法（通常也称为 “谓词”）告诉服务器客户端想要对请求的页面做什么。</p>
+<p>下面这些方法是比较常见的：</p>
+<ul>
+<li>GET：浏览器通知服务器只获取页面上的信息并且发送回来。这可能是最常用的方法。</li>
+<li>HEAD：浏览器告诉服务器获取信息，但是只对头信息感兴趣，不需要整个页面的内容。应用应该处理起来像接收到一个 GET 请求但是不传递实际内容。在 Flask 中你完全不需要处理它，底层的 Werkzeug 库会为你处理的。</li>
+<li>POST：浏览器通知服务器它要在 URL 上提交一些信息，服务器必须保证数据被存储且只存储一次。这是 HTML 表单通常发送数据到服务器的方法。</li>
+<li>PUT：同 POST 类似，但是服务器可能触发了多次存储过程，多次覆盖掉旧值。现在你就会问这有什么用，有许多理由需要如此去做。考虑下在传输过程中连接丢失：在这种情况下浏览器和服务器之间的系统可能安全地第二次接收请求，而不破坏其它东西。该过程操作 POST 方法是不可能实现的，因为它只会被触发一次。</li>
+<li>DELETE：移除给定位置的信息。</li>
+<li>OPTIONS：给客户端提供一个快速的途径来指出这个 URL 支持哪些 HTTP 方法。从 Flask 0.6 开始，自动实现了该功能。</li>
+</ul>
+<p>现在在 HTML4 和 XHTML1 中，表单只能以 GET 和 POST 方法来提交到服务器。在 JavaScript 和以后的 HTML 标准中也能使用其它的方法。同时，HTTP 最近变得十分流行，浏览器不再是唯一使用 HTTP 的客户端。比如许多版本控制系统使用 HTTP。</p>
+<h2 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h2><p>练习题1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 请开发一个小应用</span><br><span class="hljs-comment"># URL 地址输入 http://127.0.0.1:5000/xxx（其中 xxx 表示你的名字）</span><br><span class="hljs-comment"># 访问页面会显示 xxx。</span><br><br><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask<br>app = Flask(__name__)<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/&lt;username&gt;&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_name</span>(<span class="hljs-params">username</span>):</span><br>    <span class="hljs-keyword">return</span> username<br></code></pre></td></tr></table></figure>
+
+
+<p>练习题2</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 请完成一个应用</span><br><span class="hljs-comment"># 当 URL 是 http://127.0.0.1:5000/sum/a/b 时</span><br><span class="hljs-comment"># 其中 a 和 b 都是数字，服务器返回它们的和。</span><br><br><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask<br>app = Flask(__name__)<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/sum/&lt;int:a&gt;/&lt;int:b&gt;&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_sum</span>(<span class="hljs-params">a,b</span>):</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#123;0&#125; + &#123;1&#125; = &#123;2&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(a,b,a+b)<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -327,7 +326,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Linux%E5%85%A5%E9%97%A8/">Linux入门</a>
+                      <a class="hover-with-bg" href="/categories/Flask-%E5%85%A5%E9%97%A8/">Flask 入门</a>
                     
                   </div>
                 
@@ -335,7 +334,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/tags/Flask-Web%E5%BC%80%E5%8F%91/">Flask, Web开发</a>
                     
                   </div>
                 
@@ -348,9 +347,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/01/20/flask-1/">
+                      <a href="/2021/01/20/flask-3/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Flask介绍及安装</span>
+                        <span class="hidden-mobile">Flask 静态文件及渲染模板</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -358,8 +357,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/18/linux-1/">
-                        <span class="hidden-mobile">Linux基本操作体验</span>
+                      <a href="/2021/01/20/flask-1/">
+                        <span class="hidden-mobile">Flask介绍及安装</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
