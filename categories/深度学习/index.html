@@ -17,25 +17,9 @@
   <meta name="description" content="">
   <meta name="author" content="PGJ">
   <meta name="keywords" content="">
-  <title>Flask 静态文件及渲染模板 - 2020 to 2030</title>
+  <title>分类 - 深度学习 - 2020 to 2030</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 
@@ -69,7 +53,7 @@
 
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 60vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -171,56 +155,11 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Flask 静态文件及渲染模板">
+            <span class="h2" id="subtitle" title="分类 - 深度学习">
               
             </span>
 
             
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-01-20 15:32" pubdate>
-        2021年1月20日 下午
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      417 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      4
-       分钟
-    </span>
-  
-
-  
-  
-    
-      <!-- 不蒜子统计文章PV -->
-      <span id="busuanzi_container_page_pv" style="display: none">
-        <i class="iconfont icon-eye" aria-hidden="true"></i>
-        <span id="busuanzi_value_page_pv"></span> 次
-      </span>
-    
-  
-</div>
 
             
           </div>
@@ -233,140 +172,40 @@
 
   <main>
     
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+  <p class="h4">共计 1 篇文章</p>
+  <hr>
+  
+  
+    
       
+      <p class="h5">2021</p>
+    
+    <a href="/2021/01/22/paddle-1/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">paddle深度学习与图像处理</span>
+      <time style="float: right;">01-22</time>
+    </a>
+  
+</div>
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">Flask 静态文件及渲染模板</h1>
-            
-              <p class="note note-info">
-                
-                  本文最后更新于：2021年1月20日 下午
-                
-              </p>
-            
-            <div class="markdown-body">
-              <h1 id="Flask-静态文件及渲染模板"><a href="#Flask-静态文件及渲染模板" class="headerlink" title="Flask 静态文件及渲染模板"></a>Flask 静态文件及渲染模板</h1><h2 id="静态文件"><a href="#静态文件" class="headerlink" title="静态文件"></a>静态文件</h2><p>动态的 web 应用同样需要静态文件。<code>CSS</code> 和 <code>JavaScript</code> 文件通常来源于此。理想情况下，你的 web 服务器已经配置好为它们服务，然而在开发过程中 Flask 就能够做到。只要在你的包中或模块旁边创建一个名为 <code>static</code> 的文件夹，在应用中使用 <code>/static</code> 即可访问。</p>
-<p>给静态文件生成 URL ，使用特殊的 <code>static</code> 端点名：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">url_for(<span class="hljs-string">&#x27;static&#x27;</span>, filename=<span class="hljs-string">&#x27;style.css&#x27;</span>)<br></code></pre></td></tr></table></figure>
-<p>这个文件是应该存储在文件系统上的 <code>static/style.css</code> 。</p>
-<h2 id="渲染模板"><a href="#渲染模板" class="headerlink" title="渲染模板"></a>渲染模板</h2><p>可以使用方法 <code>render_template()</code> 来渲染模板。所有你需要做的就是提供模板的名称以及你想要作为关键字参数传入模板的变量。</p>
-<p>渲染模板的例子：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask, render_template<br><br>app = Flask(__name__)<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/hello/&#x27;</span></span>)</span><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/hello/&lt;name&gt;&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello</span>(<span class="hljs-params">name=<span class="hljs-literal">None</span></span>):</span>   <span class="hljs-comment"># 默认 name 为 None</span><br>    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&#x27;hello.html&#x27;</span>, name=name)   <span class="hljs-comment"># 将 name 参数传递到模板变量中</span><br></code></pre></td></tr></table></figure>
-<p>Flask 将会在 <code>templates</code> 文件夹中寻找模板。</p>
-<p>对于模板，你可以使用 Jinja2 模板的全部能力。详细信息查看官方的 <a target="_blank" rel="noopener" href="http://jinja.pocoo.org/docs/2.10/templates/">Jinja2 Template Documentation</a> 。</p>
-<p>自动转义默认是开启的，因此如 <code>name</code> 包含 HTML，它将会自动转义。如果你信任一个变量，并且你知道它是安全的（例如一个模块把 wiki 标记转换到 HTML ），你可以用 <code>Markup</code> 类或 <code>|safe</code> 过滤器在模板中标记它是安全的。 在 Jinja 2 文档中，你会见到更多例子。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>静态文件放在 <code>static</code> 目录中，模板文件放在 <code>templates</code> 目录下。</p>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Flask-%E5%85%A5%E9%97%A8/">Flask 入门</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/Flask-Web%E5%85%A5%E9%97%A8/">Flask, Web入门</a>
-                    
-                  </div>
-                
+
+
+
               </div>
-              
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2021/01/22/paddle-1/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">paddle深度学习与图像处理</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2021/01/20/flask-2/">
-                        <span class="hidden-mobile">Flask 路由</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
             </div>
-
-            
-              <!-- Comments -->
-              <article class="comments" id="comments">
-                
-                
-  <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
-      var light = 'github-light';
-      var dark = 'github-dark';
-      var schema = document.documentElement.getAttribute('data-user-color-scheme');
-      if (schema === 'dark') {
-        schema = dark;
-      } else {
-        schema = light;
-      }
-      window.UtterancesThemeLight = light;
-      window.UtterancesThemeDark = dark;
-      var s = document.createElement('script');
-      s.setAttribute('src', 'https://utteranc.es/client.js');
-      s.setAttribute('repo', 'Moonlover-Gj/20to30-utterances');
-      s.setAttribute('issue-term', 'title');
-      
-      s.setAttribute('label', 'utterances');
-      
-      s.setAttribute('theme', schema);
-      s.setAttribute('crossorigin', 'anonymous');
-      document.getElementById('comments').appendChild(s);
-    })
-  </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
-
-
-              </article>
-            
-          </article>
+          </div>
         </div>
       </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
     
 
     
@@ -470,15 +309,9 @@
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
