@@ -192,7 +192,164 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/27/paddle-1-2/">paddle-1-2</a>
+        <a href="/2021/01/29/paddle-2-2/">【手写数字识别】之数据处理</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/29/paddle-2-2/">
+          
+          
+            
+          
+          【手写数字识别】之数据处理上一节，我们通过调用飞桨提供的API（paddle.dataset.mnist）加载MNIST数据集。但在工业实践中，我们面临的任务和数据环境千差万别，通常需要自己编写适合当前任务的数据处理程序，一般涉及如下五个环节：
+
+读入数据
+划分数据集
+生成批次数据
+训练样本集乱序
+校验数据有效性
+
+前提条件在读取数据与处理前，首先要加载飞桨和数据处理库
+123456789# 加载
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-29 15:08" pubdate>
+              2021-01-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Paddle/">Paddle</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Paddle-AI/">Paddle AI</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/29/paddle-2-1/">通过极简方案构建手写数字识别模型</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/29/paddle-2-1/">
+          
+          
+            
+          
+          通过极简方案构建手写数字识别模型手写数字识别任务
+任务输入：一系列手写数字图片，其中每张图片都是 28x28 的像素矩阵。
+任务输出：经过了大小归一化和居中处理，输出对应的 0~9 的数字标签。
+MNIST 数据集是从 NIST 的 Special Database 3（SD-3）和 Special Database 1（SD-1）构建而来。Yann LeCun 等人从 SD-1 和 SD-3 中
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-29 15:07" pubdate>
+              2021-01-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Paddle/">Paddle</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Paddle-AI/">Paddle AI</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/29/paddle-1-3/">使用飞桨构建波士顿房价预测模型</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/29/paddle-1-3/">
+          
+          
+            
+          
+          使用飞桨构建波士顿房价预测模型加载飞桨、Numpy 和相关类库1234567import paddleimport paddle.fluid as fluidimport paddle.fluid.dygraph as dygraphfrom paddle.fluid.dygraph import Linearimport numpy as npimport osimport random
+代码中
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-29 15:07" pubdate>
+              2021-01-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Paddle/">Paddle</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Paddle-AI/">Paddle AI</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/27/paddle-1-2/">使用 Python 语言和 Numpy 库来构建神经网络模型</a>
       </h1>
 
       <p class="index-excerpt">
@@ -203,8 +360,7 @@
           
           使用 Python 语言和 Numpy 库来构建神经网络模型波士顿房价预测任务对于预测问题，可以根据预测输出的类型是连续的实数值，还是离散的标签，区分为回归任务和分类任务。因为房价是一个连续值，所以房价预测显然是一个回归任务。
 线性回归模型假设房价和各影响因素之间能够用线性关系来描述：
-y=∑j=1Mxjwj+by = {\sum_{j=1}^Mx_j w_j} + by=j=1∑Mxjwj+b
-
+y=∑j=1Mxjwj+by = {\sum_{j=1}^Mx_j w_j} + b*y*=*j*=1∑*M**
         </a>
       </p>
 
@@ -243,7 +399,7 @@ y=∑j=1Mxjwj+by = {\sum_{j=1}^Mx_j w_j} + by=j=1∑Mxjwj+b
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/27/paddle-1-1/">paddle-1-1</a>
+        <a href="/2021/01/27/paddle-1-1/">机器学习与深度学习综述</a>
       </h1>
 
       <p class="index-excerpt">
@@ -520,8 +676,10 @@ who命令的其他常用参数
 
 
 
+
 参数
 说明
+
 
 
 
@@ -531,8 +689,6 @@ who命令的其他常用参数
 
 -d
 打印死掉的进程
-
-
         </a>
       </p>
 
@@ -565,162 +721,19 @@ who命令的其他常用参数
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/18/linux-1/">Linux基本操作体验</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/18/linux-1/">
-          
-          
-            
-          
-          Linux基本操作体验12345678#创建一个名为`file`的文件，touch 是一个命令touch file#进入一个目录，cd是一个命令cd /etc/#查看当前所在目录pwd
-快捷键​    在Xfce终端中，可以使用Tab键来进行命令补全，Ctrl + C 可以强行终止当前程序
-其他一些快捷键
 
 
-按键
-作用
-
-
-
-Ctrl + d
-键盘输入结束或退出终端
-
-
-Ctrl + s
-暂停当
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-18 16:04" pubdate>
-              2021-01-18
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux%E5%85%A5%E9%97%A8/">Linux入门</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/17/Markdown/">Markdown简单使用教程</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/17/Markdown/">
-          
-          
-            
-          
-          Markdown简单使用教程一、标题标题有两种格式，这里是使用#格式。使用#号可以表示1-6级标题
-123456# 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题
-二、段落格式
-段落换行
-Markdown段落换行是使用两个以上空格加上回车当然也可以直接在段落后面使用一个空格来表示新开段落
-
-
-
-字体
-Markdown可以使用一下几种字体*斜体文字
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-17 22:12" pubdate>
-              2021-01-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Markdown%E5%85%A5%E9%97%A8/">Markdown入门</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Markdown/">Markdown</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/13/hello-world/">Hello World</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/13/hello-world/">
-          
-          
-            
-          
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-13 11:24" pubdate>
-              2021-01-13
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 

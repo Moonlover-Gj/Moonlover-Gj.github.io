@@ -254,51 +254,56 @@
             <div class="markdown-body">
               <h1 id="Linux基本操作体验"><a href="#Linux基本操作体验" class="headerlink" title="Linux基本操作体验"></a>Linux基本操作体验</h1><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment">#创建一个名为`file`的文件，touch 是一个命令</span><br>touch file<br><br><span class="hljs-comment">#进入一个目录，cd是一个命令</span><br><span class="hljs-keyword">cd</span> <span class="hljs-string">/etc/</span><br><br><span class="hljs-comment">#查看当前所在目录</span><br><span class="hljs-keyword">pwd</span><br></code></pre></td></tr></table></figure>
 <h1 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h1><p>​    在<code>Xfce终端</code>中，可以使用<code>Tab</code>键来进行命令补全，<code>Ctrl + C</code> 可以强行终止当前程序</p>
-<h2 id="其他一些快捷键"><a href="#其他一些快捷键" class="headerlink" title="其他一些快捷键"></a>其他一些快捷键</h2><table>
+<h2 id="其他一些快捷键"><a href="#其他一些快捷键" class="headerlink" title="其他一些快捷键"></a>其他一些快捷键</h2><div class="table-container">
+<table>
 <thead>
 <tr>
-<th align="left">按键</th>
+<th style="text-align:left">按键</th>
 <th>作用</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left"><code>Ctrl + d</code></td>
+<tbody>
+<tr>
+<td style="text-align:left"><code>Ctrl + d</code></td>
 <td>键盘输入结束或退出终端</td>
 </tr>
 <tr>
-<td align="left"><code>Ctrl + s</code></td>
+<td style="text-align:left"><code>Ctrl + s</code></td>
 <td>暂停当前程序，暂停后按下任意键恢复运行</td>
 </tr>
 <tr>
-<td align="left"><code>Ctrl + z</code></td>
+<td style="text-align:left"><code>Ctrl + z</code></td>
 <td>将当前程序放到后台运行，恢复到前台为命令<code>fg</code></td>
 </tr>
 <tr>
-<td align="left"><code>Ctrl + a</code></td>
+<td style="text-align:left"><code>Ctrl + a</code></td>
 <td>将光标移至输入行头，相当于<code>Home</code>键</td>
 </tr>
 <tr>
-<td align="left"><code>Ctrl + e</code></td>
+<td style="text-align:left"><code>Ctrl + e</code></td>
 <td>将光标移至输入行末，相当于<code>End</code>键</td>
 </tr>
 <tr>
-<td align="left"><code>Ctrl + k</code></td>
+<td style="text-align:left"><code>Ctrl + k</code></td>
 <td>删除从光标所在位置到行末</td>
 </tr>
 <tr>
-<td align="left"><code>Alt + Backspace</code></td>
+<td style="text-align:left"><code>Alt + Backspace</code></td>
 <td>向前删除一个单词</td>
 </tr>
 <tr>
-<td align="left"><code>Shift + PgUp</code></td>
+<td style="text-align:left"><code>Shift + PgUp</code></td>
 <td>将终端显示向上滚动</td>
 </tr>
 <tr>
-<td align="left"><code>Shift + PgDn</code></td>
+<td style="text-align:left"><code>Shift + PgDn</code></td>
 <td>将终端显示向下滚动</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h1 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h1><p>Shell 常用的通配符</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -306,7 +311,8 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>*</code></td>
 <td>匹配 0 或多个字符</td>
 </tr>
@@ -334,12 +340,12 @@
 <td><code>&#123;c1..c2&#125;</code></td>
 <td>匹配 c1-c2 中全部字符 如 {1..10}</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h1 id="学会在命令行中获取帮助"><a href="#学会在命令行中获取帮助" class="headerlink" title="学会在命令行中获取帮助"></a>学会在命令行中获取帮助</h1><h2 id="使用-man-命令"><a href="#使用-man-命令" class="headerlink" title="使用 man 命令"></a>使用 man 命令</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment">#可以使用如下方式获得某个命令的说明和使用的详细介绍</span><br><span class="hljs-built_in">man</span> &lt;command_name&gt;<br><span class="hljs-comment">#查看man命令本身的使用方式</span><br><span class="hljs-built_in">man</span> <span class="hljs-built_in">man</span><br></code></pre></td></tr></table></figure>
 <h2 id="使用help参数"><a href="#使用help参数" class="headerlink" title="使用help参数"></a>使用help参数</h2><p>如果你知道某个命令的作用，只是想快速查看一些它的某个具体参数的作用，那么你可以使用 <code>--help</code> 参数，大部分命令都会带有这个参数，如：</p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">ls</span> <span class="hljs-params">--help</span><br></code></pre></td></tr></table></figure>
-
-
 
             </div>
             <hr>

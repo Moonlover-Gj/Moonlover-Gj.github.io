@@ -259,35 +259,32 @@
 <p>Markdown段落换行是使用两个以上空格加上回车<br>当然也可以直接在段落后面使用一个空格来表示新开段落</p>
 </li>
 </ol>
-<ol start="2">
+<ol>
 <li><p>字体</p>
-<p>Markdown可以使用一下几种字体<br><code>*斜体文字*</code>或者<code>—斜体文字—</code><br><code> **粗体文字**</code>或者<code>——粗体文字——</code><br><code>***粗斜体文字***</code>或者<code>———粗斜体文字———</code></p>
+<p>Markdown可以使用一下几种字体<br><code>*斜体文字*</code>或者<code>—斜体文字—</code><br><code>**粗体文字**</code>或者<code>——粗体文字——</code><br><code>***粗斜体文字***</code>或者<code>———粗斜体文字———</code></p>
 </li>
 </ol>
-<ol start="3">
+<ol>
 <li><p>分割线</p>
 <p>你可以在一行中用三个以上的星号(<code>+</code>)、减号(<code>-</code>)、底线(<code>-</code>)来建立一个分割线，行内不能有其他东西。<br>也可以在星号或是减号中间插入空格。<br>下面每种写法都可以创建分割线：</p>
 </li>
 </ol>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-strong">**<span class="hljs-emphasis">*</span></span><br><span class="hljs-strong"><span class="hljs-emphasis"></span></span><br><span class="hljs-strong"><span class="hljs-emphasis">*</span> <span class="hljs-emphasis">* *</span></span><br><span class="hljs-strong"></span><br><span class="hljs-strong">**</span><span class="hljs-strong">****</span><br><br><span class="hljs-bullet">-</span> - -<br><br>-------------<br></code></pre></td></tr></table></figure>
-
-<ol start="4">
+<ol>
 <li><p>删除线</p>
 <p>如果要在段落的文字上添加删除线，只需要在文字的两端加上两个波浪线 <code>~~</code>即可</p>
 </li>
 </ol>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section">#例如</span><br><br>~~Hello,girls~~<br></code></pre></td></tr></table></figure>
-
-<ol start="5">
+<ol>
 <li><p>下划线</p>
 <p>下划线课通过HTML的 <code>&lt;u&gt;</code>标签来实现：</p>
 </li>
 </ol>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">u</span>&gt;</span></span>带下划线文本<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">u</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
-
-<ol start="6">
+<ol>
 <li><p>脚注</p>
-<p>Markdown脚注的格式如下：<br><code> [^要注明的文本]</code>例如</p>
+<p>Markdown脚注的格式如下：<br><code>[^要注明的文本]</code>例如</p>
 </li>
 </ol>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown">[^PGJ] ： A handsome boy！<br></code></pre></td></tr></table></figure>
@@ -296,12 +293,11 @@
 <li>无序列表使用星号（<code>*</code>）、加号（<code>+</code>）、减号（<code>-</code>）作为列表标记，这些标记后面要加一个空格再填写内容</li>
 </ol>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">*</span> 第一项<br><span class="hljs-bullet">*</span> 第二项<br><span class="hljs-bullet">*</span> 第三项<br><br><span class="hljs-bullet">+</span> 第一项<br><span class="hljs-bullet">+</span> 第二项<br><span class="hljs-bullet">+</span> 第三项<br><br><span class="hljs-bullet">-</span> 第一项<br><span class="hljs-bullet">-</span> 第二项<br><span class="hljs-bullet">-</span> 第三项<br></code></pre></td></tr></table></figure>
-<ol start="2">
+<ol>
 <li>有序列表使用数字再加上点号（<code>.</code>）来表示，记得加上空格再填写内容</li>
 </ol>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 第一项<br><span class="hljs-bullet">2.</span> 第二项<br><span class="hljs-bullet">3.</span> 第三项<br></code></pre></td></tr></table></figure>
-
-<ol start="3">
+<ol>
 <li>列表嵌套</li>
 </ol>
 <p>列表嵌套只需要再子列表的选项前面添加四个空格即可。</p>
@@ -311,7 +307,7 @@
 <h2 id="五、代码"><a href="#五、代码" class="headerlink" title="五、代码"></a>五、代码</h2><ol>
 <li>如果是段落上的一个函数或片段的代码可以用反引号（<code>）,这个反引号就是键盘</code>Esc`键下面的那个键</li>
 </ol>
-<ol start="2">
+<ol>
 <li>代码区块</li>
 </ol>
 <p>代码区块使用4个空格或者一个制表符（<code>Tab</code>键）</p>
@@ -324,7 +320,7 @@
 <p>就是：开头一个感叹号<code>!</code>，接着一个方括号，里面放上图片的替代文字，<br>接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上选择性的”titlt”属性的文字。</p>
 <h2 id="八、表格"><a href="#八、表格" class="headerlink" title="八、表格"></a>八、表格</h2><p>Markdown 制作表格使用 | 来分隔不同的单元格，使用 - 来分隔表头和其他行<br>语法格式如下：</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown">|  表头   | 表头  |<br>|  ----  | ----  |<br>| 单元格  | 单元格 |<br>| 单元格  | 单元格 |<br></code></pre></td></tr></table></figure>
-<p>对齐方式<br><code>-: </code>设置内容和标题栏居右对齐<br><code>:- </code>设置内容和标题栏居左对齐<br><code>:-: </code>设置内容和标题栏居中对齐</p>
+<p>对齐方式<br><code>-:</code>设置内容和标题栏居右对齐<br><code>:-</code>设置内容和标题栏居左对齐<br><code>:-:</code>设置内容和标题栏居中对齐</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown">| 左对齐 | 右对齐 | 居中对齐 |<br>| :-----| ----: | :----: |<br>| 单元格 | 单元格 | 单元格 |<br>| 单元格 | 单元格 | 单元格 |<br></code></pre></td></tr></table></figure>
 <h2 id="九、Markdown-高级技巧"><a href="#九、Markdown-高级技巧" class="headerlink" title="九、Markdown 高级技巧"></a>九、Markdown 高级技巧</h2><p>请查看教程 [<a target="_blank" rel="noopener" href="https://www.runoob.com/markdown/md-advance.html">https://www.runoob.com/markdown/md-advance.html</a></p>
 

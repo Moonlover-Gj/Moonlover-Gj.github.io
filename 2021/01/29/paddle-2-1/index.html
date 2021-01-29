@@ -1,0 +1,625 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PGJ">
+  <meta name="keywords" content="">
+  <title>通过极简方案构建手写数字识别模型 - 2020 to 2030</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css# 滚动条颜色.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css# 鼠标指针.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>2020 to 2030</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                索引
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    归档
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    分类
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    标签
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/background.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="通过极简方案构建手写数字识别模型">
+              
+            </span>
+
+            
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-29 15:07" pubdate>
+        2021年1月29日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">通过极简方案构建手写数字识别模型</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年1月29日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="通过极简方案构建手写数字识别模型"><a href="#通过极简方案构建手写数字识别模型" class="headerlink" title="通过极简方案构建手写数字识别模型"></a>通过极简方案构建手写数字识别模型</h1><h2 id="手写数字识别任务"><a href="#手写数字识别任务" class="headerlink" title="手写数字识别任务"></a>手写数字识别任务</h2><ul>
+<li>任务输入：一系列手写数字图片，其中每张图片都是 28x28 的像素矩阵。</li>
+<li>任务输出：经过了大小归一化和居中处理，输出对应的 0~9 的数字标签。</li>
+<li>MNIST 数据集是从 NIST 的 Special Database 3（SD-3）和 Special Database 1（SD-1）构建而来。Yann LeCun 等人从 SD-1 和 SD-3 中各取一半数据作为 MNIST 训练集和测试集，其中训练集来自 250 位不同的标注员，且训练集和测试集的标注员完全不同。</li>
+</ul>
+<h2 id="前提条件：导入相关库"><a href="#前提条件：导入相关库" class="headerlink" title="前提条件：导入相关库"></a>前提条件：导入相关库</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 加载飞桨和相关类库</span><br><span class="hljs-keyword">import</span> paddle<br><span class="hljs-keyword">import</span> paddle.fluid <span class="hljs-keyword">as</span> fluid<br><span class="hljs-keyword">from</span> paddle.fluid.dygraph <span class="hljs-keyword">import</span> Linear<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np <br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br></code></pre></td></tr></table></figure>
+<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><p>飞桨提供了多个封装好的数据集 API，涵盖计算机视觉、自然语言处理、推荐系统等多个领域，帮助读者快速完成深度学习任务。如在手写数字识别任务中，通过 <a target="_blank" rel="noopener" href="https://www.paddlepaddle.org.cn/documentation/docs/zh/api_cn/data_cn/dataset_cn.html">paddle.dataset.mnist</a> 可以直接获取处理好的 MNIST 训练集、测试集，飞桨 API 支持如下常见的学术数据集：</p>
+<ul>
+<li>mnist</li>
+<li>cifar</li>
+<li>Conll05</li>
+<li>imdb</li>
+<li>imikolov</li>
+<li>movielens</li>
+<li>sentiment</li>
+<li>uci_housing</li>
+<li>wmt14</li>
+<li>wmt16</li>
+</ul>
+<p>通过 <code>paddle.dataset.mnist.train()</code> 函数设置数据读取器，<code>batch_size</code> 设置为 8，即一个批次有 8 张图片和 8 个标签，代码如下所示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 如果～/.cache/paddle/dataset/mnist/目录下没有MNIST数据，API会自动将MINST数据下载到该文件夹下</span><br><span class="hljs-comment"># 设置数据读取器，读取MNIST数据训练集</span><br>trainset = paddle.dataset.mnist.train()<br><span class="hljs-comment"># 包装数据读取器，每次读取的数据数量设置为batch_size=8</span><br>train_reader = paddle.batch(trainset, batch_size=<span class="hljs-number">8</span>)<br></code></pre></td></tr></table></figure>
+<p><code>paddle.batch</code> 函数将 MNIST 数据集拆分成多个批次，通过如下代码读取第一个批次的数据内容，观察打印结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 以迭代的形式读取数据</span><br><span class="hljs-keyword">for</span> batch_id, data <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(train_reader()):<br>    <span class="hljs-comment"># 获得图像数据，并转为float32类型的数组</span><br>    img_data = np.array([x[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> data]).astype(<span class="hljs-string">&#x27;float32&#x27;</span>)<br>    <span class="hljs-comment"># 获得图像标签数据，并转为float32类型的数组</span><br>    label_data = np.array([x[<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> data]).astype(<span class="hljs-string">&#x27;float32&#x27;</span>)<br>    <span class="hljs-comment"># 打印数据形状</span><br>    print(<span class="hljs-string">&quot;图像数据形状和对应数据为:&quot;</span>, img_data.shape, img_data[<span class="hljs-number">0</span>])<br>    print(<span class="hljs-string">&quot;图像标签形状和对应数据为:&quot;</span>, label_data.shape, label_data[<span class="hljs-number">0</span>])<br>    <span class="hljs-keyword">break</span><br><br>print(<span class="hljs-string">&quot;\n打印第一个batch的第一个图像，对应标签数字为&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(label_data[<span class="hljs-number">0</span>]))<br><span class="hljs-comment"># 显示第一batch的第一个图像</span><br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br>img = np.array(img_data[<span class="hljs-number">0</span>]+<span class="hljs-number">1</span>)*<span class="hljs-number">127.5</span><br>img = np.reshape(img, [<span class="hljs-number">28</span>, <span class="hljs-number">28</span>]).astype(np.uint8)<br><br>plt.figure(<span class="hljs-string">&quot;Image&quot;</span>) <span class="hljs-comment"># 图像窗口名称</span><br>plt.imshow(img)<br>plt.axis(<span class="hljs-string">&#x27;on&#x27;</span>) <span class="hljs-comment"># 关掉坐标轴为 off</span><br>plt.title(<span class="hljs-string">&#x27;image&#x27;</span>) <span class="hljs-comment"># 图像题目</span><br>plt.show()<br></code></pre></td></tr></table></figure>
+<p>从打印结果看，从数据加载器 <code>train_reader()</code> 中读取一次数据，可以得到形状为（8, 784）的图像数据和形状为（8,）的标签数据。其中，形状中的数字 8 与设置的 <code>batch_size</code> 大小对应，784 为 MINIST 数据集中每个图像的像素大小 (28*28)。</p>
+<p><strong>说明：</strong></p>
+<p>飞桨将维度是 28<em>28 的手写数字图像转成向量形式存储，因此使用飞桨数据加载器读取到的手写数字图像是长度为 784（28</em>28）的向量。</p>
+<h2 id="模型设计"><a href="#模型设计" class="headerlink" title="模型设计"></a>模型设计</h2><p>以类的方式组件手写数字识别的网络</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 定义 mnist 数据识别网络结构</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MNIST</span>(<span class="hljs-params">fluid.dygraph.Layer</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-built_in">super</span>(MNIST， self).__init__()<br>        <br>        <span class="hljs-comment"># 定义一层全连接层，输出维度是1，激活函数为None，即不使用激活函数</span><br>        self.fc = Linear(input_dim=<span class="hljs-number">784</span>, output_dim=<span class="hljs-number">1</span>, act=<span class="hljs-literal">None</span>)<br>        <br>    <span class="hljs-comment"># 定义网络结构的前向计算过程</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span>(<span class="hljs-params">self, inputs</span>)</span><br>    outputs = self.fc(inputs)<br>    <span class="hljs-keyword">return</span> outputs<br><br></code></pre></td></tr></table></figure>
+<h2 id="训练配置"><a href="#训练配置" class="headerlink" title="训练配置"></a>训练配置</h2><p>训练配置需要先生成模型实例（设为 “训练” 状态），再设置优化算法和学习率（使用随机梯度下降 SGD，学习率设置为 0.001），实现方法如下所示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 定义飞桨动态图工作环境</span><br><span class="hljs-keyword">with</span> fluid.dygraph.guard():<br>    <span class="hljs-comment"># 声明网络结构、</span><br>    model = MNIST()<br>    <span class="hljs-comment"># 启动训练模式</span><br>    model.train()<br>    <span class="hljs-comment"># 定义数据读取函数，数据读取 batch_size 设置为 16</span><br>    train_loader = paddle.batch(paddle.dataset.mnist.train(), batch_size=<span class="hljs-number">16</span>)<br>    <span class="hljs-comment"># 定义优化器，使用随机梯度下降SGD优化器，学习率设置为0.001</span><br>    optimizer = fluid.optimizer.SGDOptimizer(learning_rate=<span class="hljs-number">0.001</span>, parameter_list=model.parameters())<br>    <br></code></pre></td></tr></table></figure>
+<h2 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h2><p>训练过程采用二层循环嵌套方式，训练完成后需要保存模型参数，以便后续使用。</p>
+<ul>
+<li>内层循环：负责整个数据集的一次遍历，遍历数据集采用分批次（batch）方式。</li>
+<li>外层循环：定义遍历数据集的次数，本次训练中外层循环 10 次，通过参数 EPOCH_NUM 设置。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 通过 with 语句创建一个dygraph运行的 contest</span><br><span class="hljs-comment"># 动态图下的一些操作需要在 guard 下进行</span><br><span class="hljs-keyword">with</span> fluid.dygraph.guard():<br>    model = MNIST()<br>    model.train()<br>    train_loader = paddle.batch(paddle.dataset.mnist.train(), batch_size=<span class="hljs-number">16</span>)<br>    optimizer = fluid.optimizer.SGDOptimizer(learning_rate=<span class="hljs-number">0.001</span>, parameter_list=model.parameters())<br>    <br>    EPOCH_NUM = <span class="hljs-number">10</span><br>    <span class="hljs-keyword">for</span> epoch_id <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(EPOCH_NUM):<br>        <span class="hljs-keyword">for</span> batch_id, data <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(train_loader()):<br>            <span class="hljs-comment"># 准备数据，格式需要转换成符合框架要求</span><br>            image_data = np.array([x[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> data]).astype(<span class="hljs-string">&#x27;float32&#x27;</span>)<br>            label_data = np.array([x[<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> data]).astype(<span class="hljs-string">&#x27;float32&#x27;</span>).reshape(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)<br>            <span class="hljs-comment"># 将数据转为飞桨动态图格式</span><br>            image = fluid.dygraph.to_variable(image_data)<br>            label = fluid.dygraph.to_variable(label_data)<br>            <br>            <span class="hljs-comment"># 前向计算的过程</span><br>            predict = model(image)<br>            <br>            <span class="hljs-comment"># 计算损失，取一个批次样本损失的平均值</span><br>            loss = fluid.layers.square_error_cost(predict, label)<br>            avg_loss = fluid.layers.mean(loss)<br>            <br>            <span class="hljs-comment"># 每训练了 1000 批次的数据，打印下当前 Loss 的情况</span><br>            <span class="hljs-keyword">if</span> batch_id != <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> batch_id % <span class="hljs-number">1000</span> == <span class="hljs-number">0</span>:<br>                print(<span class="hljs-string">&quot;epoch: &#123;&#125;, batch: &#123;&#125;, loss is: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(epoch_id, batch_id, avg_loss.numpy()))<br>                <br>            <span class="hljs-comment"># 后向传播，更新参数的过程</span><br>            avg_loss.backward()<br>            optimizer.minimize(avg_loss)<br>            model.clear_gradients()<br>            <br><span class="hljs-comment"># 保存模型</span><br>fluid.save_dygraph(model.state_dict(), <span class="hljs-string">&#x27;mnist&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="模型测试"><a href="#模型测试" class="headerlink" title="模型测试"></a>模型测试</h2><p>模型测试的主要目的是验证训练好的模型是否能正确识别出数字，包括如下四步：</p>
+<ul>
+<li>声明实例</li>
+<li>加载模型：加载训练过程中保存的模型参数。</li>
+<li>灌入数据：将测试样本传入模型，模型的状态设置为校验状态（eval），显式告诉框架我们接下来只会使用前向计算的流程，不会计算梯度和梯度反向传播。</li>
+<li>获取预测结果，取整后作为预测标签输出。</li>
+</ul>
+<p>在模型测试之前，需要先从 ‘./work/example_0.jpg’ 文件中读取样例图片，并进行归一化处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 导入图像读取第三方库</span><br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">import</span> matplotlib.image <span class="hljs-keyword">as</span> mpimg<br><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-comment"># 读取图像</span><br>img1 = cv2.imread(<span class="hljs-string">&#x27;./work/example_0.png&#x27;</span>)<br>example = mpimg.imread(<span class="hljs-string">&#x27;./work/example_0.png&#x27;</span>)<br><br><span class="hljs-comment"># 显示图像</span><br>plt.imshow(example)<br>plt.show()<br>im = Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;./work/example_0.png&#x27;</span>).convert(<span class="hljs-string">&#x27;L&#x27;</span>)<br>print(np.array(im).shape)<br>im = im.resize((<span class="hljs-number">28</span>, <span class="hljs-number">28</span>), Image.ANTIALIAS)<br>plt.imshow(im)<br>plt.show()<br>print(np.array(im).shape)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 读取一张本地的样例图片，转变成模型输入的格式</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load_image</span>(<span class="hljs-params">img_path</span>):</span><br>    <span class="hljs-comment"># 从img_path中读取图像，并转为灰度图</span><br>    im = Image.<span class="hljs-built_in">open</span>(img_path).convert(<span class="hljs-string">&#x27;L&#x27;</span>)<br>    print(np.array(im))<br>    im = im.resize((<span class="hljs-number">28</span>, <span class="hljs-number">28</span>), Image.ANTIALIAS)<br>    im = np.array(im).reshape(<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>).astype(np.float32)<br>    <span class="hljs-comment"># 将图像归一化，保持和数据集的数据范围一致</span><br>    im = <span class="hljs-number">1</span> - im / <span class="hljs-number">127.5</span><br>    <span class="hljs-keyword">return</span> im<br><br><span class="hljs-comment"># 定义预测过程</span><br><span class="hljs-keyword">with</span> fluid.dygraph.guard():<br>    model = MNIST()<br>    params_file_path = <span class="hljs-string">&#x27;mnist&#x27;</span><br>    img_path = <span class="hljs-string">&#x27;./work/example_0.png&#x27;</span><br>    <br>    <span class="hljs-comment"># 加载模型参数</span><br>    model_dict, _ = fluid.load_dygraph(<span class="hljs-string">&#x27;mnist&#x27;</span>)<br>    model.load_dict(model_dict)<br>    <span class="hljs-comment"># 灌入数据</span><br>    model.<span class="hljs-built_in">eval</span>()<br>    tensor_img = load_image(img_path)<br>    result = model(fluid.dygraph.to_variable(tensor_img))<br>    <br>    <span class="hljs-comment"># 预测输出取整，即为预测的数字，打印结果</span><br>    print(<span class="hljs-string">&quot;本次预测的数字是&quot;</span>,result.numpy().astype(<span class="hljs-string">&#x27;int32&#x27;</span>))<br></code></pre></td></tr></table></figure>
+<p>从打印结果来看，模型预测出的数字是与实际输出的图片的数字不一致。这里只是验证了一个样本的情况，如果我们尝试更多的样本，可发现许多数字图片识别结果是错误的。因此完全复用房价预测的实验并不适用于手写数字识别任务！</p>
+<p>接下来我们会对手写数字识别实验模型进行逐一改进，直到获得令人满意的结果。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Paddle/">Paddle</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Paddle-AI/">Paddle AI</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/29/paddle-2-2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【手写数字识别】之数据处理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/29/paddle-1-3/">
+                        <span class="hidden-mobile">使用飞桨构建波士顿房价预测模型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Moonlover-Gj/20to30-utterances');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/qipao.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/caidai.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/yinghua.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/timeDate.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/dianjichuzi.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

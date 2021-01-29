@@ -260,6 +260,7 @@
 <p>在<code>hello.py</code>中添加代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/user/&lt;username&gt;&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show_user_profile</span>(<span class="hljs-params">username</span>):</span><br>    <span class="hljs-comment"># 显示用户名</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;User &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(username)<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/post/&lt;int:post_id&gt;&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show_post</span>(<span class="hljs-params">post_id</span>):</span><br>    <span class="hljs-comment"># 显示提交整型的用户&quot;id&quot;的结果，注意&quot;int&quot;是将输入的字符串形式转换为整型数据</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Post &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(post_id)<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/path/&lt;path:subpath&gt;&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show_subpath</span>(<span class="hljs-params">subpath</span>):</span><br>    <span class="hljs-comment"># 显示 /path/ 之后的路径名</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Subpath &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(subpath)<br></code></pre></td></tr></table></figure>
 <p>转换器的主要类型如下：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -267,7 +268,8 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>string</td>
 <td>默认的数据类型，接受没有任何斜杠 “/” 的字符串</td>
 </tr>
@@ -287,7 +289,9 @@
 <td>uuid</td>
 <td>只接受 uuid 字符串</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="唯一-URLs-重定向行为"><a href="#唯一-URLs-重定向行为" class="headerlink" title="唯一 URLs / 重定向行为"></a>唯一 URLs / 重定向行为</h3><p>添加如下代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/projects/&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">projects</span>():</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;The project page&#x27;</span><br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/about&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">about</span>():</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;The about page&#x27;</span><br></code></pre></td></tr></table></figure>
 <p>第一种情况中：尾端有一个斜杠，当用户输入网址时忘了添加尾部的斜杠，系统回自动重定向到带了尾部斜杠的地址</p>
@@ -297,8 +301,6 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask, url_for<br></code></pre></td></tr></table></figure>
 <h2 id="HTTP-方法"><a href="#HTTP-方法" class="headerlink" title="HTTP 方法"></a>HTTP 方法</h2><p>HTTP (也就是 Web 应用协议) 有不同的方法来访问 URLs 。默认情况下，路由只会响应 GET 请求，但是能够通过给 <code>route()</code> 装饰器提供 <code>methods</code> 参数来改变。例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/login&#x27;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">login</span>():</span><br>    <span class="hljs-keyword">if</span> request.method == <span class="hljs-string">&#x27;POST&#x27;</span>:<br>        do_the_login()   <span class="hljs-comment"># 如果是 POST 方法就执行登录操作</span><br>    <span class="hljs-keyword">else</span>:<br>        show_the_login_form()   <span class="hljs-comment"># 如果是 GET 方法就展示登录表单</span><br></code></pre></td></tr></table></figure>
-
-
 <p>也许你并不清楚 HTTP 方法是什么？别担心，这里有一个 HTTP 方法的快速入门以及为什么它们重要：</p>
 <p><code>HTTP</code> 方法（通常也称为 “谓词”）告诉服务器客户端想要对请求的页面做什么。</p>
 <p>下面这些方法是比较常见的：</p>
@@ -313,8 +315,6 @@
 <p>现在在 HTML4 和 XHTML1 中，表单只能以 GET 和 POST 方法来提交到服务器。在 JavaScript 和以后的 HTML 标准中也能使用其它的方法。同时，HTTP 最近变得十分流行，浏览器不再是唯一使用 HTTP 的客户端。比如许多版本控制系统使用 HTTP。</p>
 <h2 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h2><p>练习题1</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 请开发一个小应用</span><br><span class="hljs-comment"># URL 地址输入 http://127.0.0.1:5000/xxx（其中 xxx 表示你的名字）</span><br><span class="hljs-comment"># 访问页面会显示 xxx。</span><br><br><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask<br>app = Flask(__name__)<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/&lt;username&gt;&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_name</span>(<span class="hljs-params">username</span>):</span><br>    <span class="hljs-keyword">return</span> username<br></code></pre></td></tr></table></figure>
-
-
 <p>练习题2</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 请完成一个应用</span><br><span class="hljs-comment"># 当 URL 是 http://127.0.0.1:5000/sum/a/b 时</span><br><span class="hljs-comment"># 其中 a 和 b 都是数字，服务器返回它们的和。</span><br><br><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask<br>app = Flask(__name__)<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/sum/&lt;int:a&gt;/&lt;int:b&gt;&#x27;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_sum</span>(<span class="hljs-params">a,b</span>):</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#123;0&#125; + &#123;1&#125; = &#123;2&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(a,b,a+b)<br></code></pre></td></tr></table></figure>
 
